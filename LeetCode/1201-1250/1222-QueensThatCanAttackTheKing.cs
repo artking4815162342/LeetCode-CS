@@ -14,7 +14,8 @@ namespace LeetCode
         public IList<IList<int>> QueensAttacktheKing(int[][] queens, int[] king)
         {
             var result = new List<IList<int>>();
-            var set = queens.Select(q => (q[0], q[1])).ToHashSet();
+            var set = queens.Select(q => (q[0], q[1]));
+            var hashset = new HashSet<(int, int)>(set);
 
             for (int r = -1; r <= 1; r++)
                 for (int c = -1; c <= 1; c++)
@@ -23,7 +24,7 @@ namespace LeetCode
                         var qc = king[1] + c * length;
                         var qr = king[0] + r * length;
                         if (qc < 0 || qc >= 8 || qr < 0 || qr >= 8) break;
-                        if (set.Contains((qr, qc)))
+                        if (hashset.Contains((qr, qc)))
                         {
                             result.Add(new int[] { qr, qc });
                             break;

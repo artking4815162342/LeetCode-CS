@@ -12,7 +12,7 @@ namespace LeetCode
     {
         public int FindMaximumXOR(int[] nums)
         {
-            var set = new HashSet<int>(nums.Length);
+            var set = new HashSet<int>();
             int ret = 0, mask = 0;
             for (int i = 31; i >= 0; --i)
             {

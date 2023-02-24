@@ -15,7 +15,7 @@ namespace LeetCode
             if (s.Length != t.Length) return false;
 
             var map = new Dictionary<char, char>(26);
-            var visited = new HashSet<char>(26);
+            var visited = new HashSet<char>();
             for (int i = 0; i < s.Length; i++)
             {
                 if (map.ContainsKey(s[i]))
