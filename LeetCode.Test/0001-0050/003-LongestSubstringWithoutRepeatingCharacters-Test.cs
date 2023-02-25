@@ -48,14 +48,36 @@ namespace LeetCode.Test
         }
 
         [TestMethod]
-        public void LengthOfLongestSubstringTest_LongString_HaveShortRepeat()
+        public void LengthOfLongestSubstringTest2()
         {
-            var input = "abcdefghijklmnopqrstuvwxyzabcdefghijk  lmnopqrstuvwxyz";
+            var input = "abcabcbb";
 
             var solution = new _003_LongestSubstringWithoutRepeatingCharacters();
             var result = solution.LengthOfLongestSubstring(input);
 
-            Assert.AreEqual(27, result);
+            Assert.AreEqual(3, result);
+        }
+        
+        [TestMethod]
+        public void LengthOfLongestSubstringTest3()
+        {
+            var input = "au";
+
+            var solution = new _003_LongestSubstringWithoutRepeatingCharacters();
+            var result = solution.LengthOfLongestSubstring(input);
+
+            Assert.AreEqual(2, result);
+        }
+        
+        [TestMethod]
+        public void LengthOfLongestSubstringTest4()
+        {
+            var input = "dvdf";
+
+            var solution = new _003_LongestSubstringWithoutRepeatingCharacters();
+            var result = solution.LengthOfLongestSubstring(input);
+
+            Assert.AreEqual(3, result);
         }
     }
 }
