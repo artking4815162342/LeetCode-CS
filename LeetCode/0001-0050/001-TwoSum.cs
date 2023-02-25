@@ -1,25 +1,25 @@
 //-----------------------------------------------------------------------------
 // Runtime: 232ms
+// Runtime: 176ms
 // Memory Usage: 31.3 MB
 // Link: https://leetcode.com/submissions/detail/352344600/
 //-----------------------------------------------------------------------------
 
 namespace LeetCode
 {
-    using System.Collections.Generic;
-
     public class _001_TwoSum
     {
         public int[] TwoSum(int[] nums, int target)
         {
-            var dic = new Dictionary<int, int>();
-
-            for (int i = 0; i < nums.Length; i++)
+            for (var i = 0; i < nums.Length; ++i)
             {
-                if (dic.ContainsKey(nums[i]))
-                    return new int[] { dic[nums[i]], i };
-                else
-                    dic[target - nums[i]] = i;
+                for (var j = i + 1; j < nums.Length; ++j)
+                {
+                    if (nums[i] + nums[j] == target)
+                    {
+                        return new[] {i, j};
+                    }
+                }
             }
 
             return new int[] { };
