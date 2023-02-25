@@ -139,6 +139,15 @@ namespace LeetCode.Test
             result = solution.MyAtoi("-123abc");
             Assert.AreEqual(-123, result);
         }
+        
+        [TestMethod]
+        public void MyAtoiTest_MixInput2()
+        {
+            var solution = new _008_StringToInteger();
+
+            var result = solution.MyAtoi("00000-42a1234");
+            Assert.AreEqual(0, result);
+        }
 
         [TestMethod]
         public void MyAtoiTest_MixInputWithOverflow()
@@ -156,6 +165,15 @@ namespace LeetCode.Test
 
             result = solution.MyAtoi("  -2247483648abc");
             Assert.AreEqual(int.MinValue, result);
+        }
+        
+        [TestMethod]
+        public void MyAtoiTest_MixInputWithOverflow2()
+        {
+            var solution = new _008_StringToInteger();
+
+            var result = solution.MyAtoi("2000000000000000000000000000000000");
+            Assert.AreEqual(int.MaxValue, result);
         }
     }
 }

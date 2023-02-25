@@ -1,8 +1,12 @@
 //-----------------------------------------------------------------------------
 // Runtime: 144ms
+// Runtime: 63ms
 // Memory Usage: 
+// Memory Usage: 38.9 MB
 // Link: 
 //-----------------------------------------------------------------------------
+
+using System.Text;
 
 namespace LeetCode
 {
@@ -10,42 +14,67 @@ namespace LeetCode
     {
         public int MyAtoi(string str)
         {
-            if (string.IsNullOrWhiteSpace(str)) { return 0; }
-
-            var navigate = false;
-            var index = 0;
-
-            while (index < str.Length && str[index] == ' ') { index++; }
-
-            if (str[index] == '-')
+            if (string.IsNullOrWhiteSpace(str))
             {
-                navigate = true;
-                index++;
-            }
-            else if (str[index] == '+')
-            {
-                index++;
+                return 0;
             }
 
-            var positiveOverflowHead = int.MaxValue / 10;
-            var positiveOverflowTail = int.MaxValue % 10;
+            var trimStart = true;
+            var findingSign = true;
+            var sign = 1;
+            var builder = new StringBuilder();
 
-            var result = 0;
-            for (; index < str.Length; index++)
+            for (var i = 0; i < str.Length; i++)
             {
-                var digit = str[index] - '0';
-                if (digit < 0 || digit > 9) { break; }
-
-                if (result > positiveOverflowHead ||
-                    (result == positiveOverflowHead && digit > positiveOverflowTail))
+                var letter = str[i];
+                if (trimStart)
                 {
-                    return navigate ? int.MinValue : int.MaxValue;
+                    if (letter == ' ')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        trimStart = false;
+                    }
                 }
 
-                result = result * 10 + digit;
+                if (findingSign && letter == '-')
+                {
+                    sign = -1;
+                    findingSign = false;
+                    continue;
+                }
+
+                if (findingSign && letter == '+')
+                {
+                    sign = 1;
+                    findingSign = false;
+                    continue;
+                }
+
+                if (char.IsDigit(letter))
+                {
+                    findingSign = false;
+                    builder.Append(letter);
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            return navigate ? -result : result;
+            if (builder.Length == 0)
+            {
+                return 0;
+            }
+
+            if (!int.TryParse(builder.ToString(), out var result))
+            {
+                return sign > 0 ? int.MaxValue : int.MinValue;
+            }
+
+            return result * sign;
         }
     }
 }
