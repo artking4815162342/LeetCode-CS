@@ -1,8 +1,12 @@
 //-----------------------------------------------------------------------------
 // Runtime: 40ms
+// Runtime: 30ms
 // Memory Usage: 14.6 MB
+// Memory Usage: 28.5 MB
 // Link: https://leetcode.com/submissions/detail/359575927/
 //-----------------------------------------------------------------------------
+
+using System;
 
 namespace LeetCode
 {
@@ -10,21 +14,37 @@ namespace LeetCode
     {
         public int Reverse(int x)
         {
+            if (x == int.MinValue)
+            {
+                return 0;
+            }
+
+            var sign = Math.Sign(x);
+            x = Math.Abs(x);
             var result = 0;
 
-            var positiveOverflow = int.MaxValue / 10;
-            var nagativeOverflow = int.MinValue / 10;
+            var lg = Math.Floor(Math.Log10(x));
+            var @decimal = (int) Math.Pow(10, lg);
 
-            for (; x != 0; x /= 10)
+            while (x > 0)
             {
-                if (result > positiveOverflow || result < nagativeOverflow)
+                try
+                {
+                    checked
+                    {
+                        result += @decimal * (x % 10);
+                    }
+                }
+                catch (Exception)
                 {
                     return 0;
                 }
-                result = result * 10 + x % 10;
+
+                x /= 10;
+                @decimal /= 10;
             }
 
-            return result;
+            return result * sign;
         }
     }
 }
