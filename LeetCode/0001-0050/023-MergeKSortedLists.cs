@@ -10,43 +10,53 @@ namespace LeetCode
     {
         public ListNode MergeKLists(ListNode[] lists)
         {
-            if (lists == null || lists.Length == 0) return null;
-
-            return MergeKHelper(lists, 0, lists.Length - 1);
+            return lists.Length == 0
+                ? null
+                : DeviceAndConquerMerge(lists, 0, lists.Length - 1);
         }
 
-        public ListNode MergeKHelper(ListNode[] lists, int i, int j)
+        private ListNode DeviceAndConquerMerge(ListNode[] lists, int left, int right)
         {
-            if (i == j) return lists[i];
-
-            int mid = i + (j - i) / 2;
-            var left = MergeKHelper(lists, i, mid);
-            var right = MergeKHelper(lists, mid + 1, j);
-            return MergeTwoLists(left, right);
-        }
-
-        private ListNode MergeTwoLists(ListNode l1, ListNode l2)
-        {
-            var head = new ListNode(-1);
-            var current = head;
-
-            while (l1 != null && l2 != null)
+            if (left == right)
             {
-                if (l1.val <= l2.val)
-                {
-                    current.next = l1;
-                    l1 = l1.next;
-                }
-                else
-                {
-                    current.next = l2;
-                    l2 = l2.next;
-                }
-                current = current.next;
+                return lists[left];
+            }
+            else
+            {
+                var middle = (left + right) / 2;
+                var mergedLeft = DeviceAndConquerMerge(lists, left, middle);
+                var mergedRight = DeviceAndConquerMerge(lists, middle + 1, right);
+                return MergeTwo(mergedLeft, mergedRight);
+            }
+        }
+
+        private ListNode MergeTwo(ListNode list0, ListNode list1)
+        {
+            if (list1 == null && list0 == null)
+            {
+                return null;
             }
 
-            current.next = l1 == null ? l2 : l1;
-            return head.next;
+            if (list1 == null)
+            {
+                return list0;
+            }
+
+            if (list0 == null)
+            {
+                return list1;
+            }
+
+            if (list0.val < list1.val)
+            {
+                list0.next = MergeTwo(list0.next, list1);
+                return list0;
+            }
+            else
+            {
+                list1.next = MergeTwo(list1.next, list0);
+                return list1;
+            }
         }
     }
 }
