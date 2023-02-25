@@ -1,50 +1,51 @@
 //-----------------------------------------------------------------------------
 // Runtime: 84ms
+// Runtime: 82ms
 // Memory Usage: 25.6 MB
+// Memory Usage: 39.3 MB
 // Link: https://leetcode.com/submissions/detail/352313138/
 //-----------------------------------------------------------------------------
 
-using System.Linq;
 using System.Text;
 
 namespace LeetCode
 {
     public class _0415_AddStrings
     {
+        private int GetDigitByIndex(string num, int index)
+        {
+            if (index >= num.Length || index < 0)
+            {
+                return 0;
+            }
+
+            return num[index] - '0';
+        }
+
         public string AddStrings(string num1, string num2)
         {
             var sb = new StringBuilder();
-            int i = num1.Length - 1, j = num2.Length - 1, carry = 0;
-            while (i >= 0 && j >= 0)
+            var mem = 0;
+            var index1 = num1.Length - 1;
+            var index2 = num2.Length - 1;
+
+            while (true)
             {
-                var value = num1[i--] - '0' + num2[j--] - '0' + carry;
+                var sum = GetDigitByIndex(num1, index1) + GetDigitByIndex(num2, index2) + mem;
+                var value = sum % 10;
+                mem = sum / 10;
 
-                var digit = value % 10;
-                carry = value / 10;
+                sb.Insert(0, value);
+                index1--;
+                index2--;
 
-                sb.Append(digit);
+                if (index1 < 0 && index2 < 0 && mem <= 0)
+                {
+                    break;
+                }
             }
 
-            while (i >= 0)
-            {
-                var value = num1[i--] - '0' + carry;
-                var digit = value % 10;
-                carry = value / 10;
-                sb.Append(digit);
-            }
-
-            while (j >= 0)
-            {
-                var value = num2[j--] - '0' + carry;
-                var digit = value % 10;
-                carry = value / 10;
-                sb.Append(digit);
-            }
-
-            if (carry != 0)
-                sb.Append(carry);
-
-            return new string(sb.ToString().Reverse().ToArray());
+            return sb.ToString();
         }
     }
 }

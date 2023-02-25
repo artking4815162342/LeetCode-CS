@@ -20,5 +20,21 @@ namespace LeetCode.Test
             var result = solution.AddStrings("111", "1");
             Assert.AreEqual("112", result);
         }
+        
+        [TestMethod]
+        public void AddStrings_3()
+        {
+            var solution = new _0415_AddStrings();
+            var result = solution.AddStrings("11", "123");
+            Assert.AreEqual("134", result);
+        }
+          
+        [TestMethod]
+        public void AddStrings_4()
+        {
+            var solution = new _0415_AddStrings();
+            var result = solution.AddStrings("456", "77");
+            Assert.AreEqual("533", result);
+        }
     }
 }
