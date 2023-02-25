@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
 // Runtime: 112ms
+// Runtime: 94ms
 // Memory Usage: 27.3 MB
 // Link: https://leetcode.com/submissions/detail/378602405/
 //-----------------------------------------------------------------------------
@@ -10,29 +11,31 @@ namespace LeetCode
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            var dummy = new ListNode(-1);
-            var current = dummy;
+            var result = new ListNode();
+            var current = result;
+            
+            var mem = 0;
 
-            var carry = 0;
-            while (l1 != null || l2 != null)
+            while (true)
             {
-                var value1 = l1 == null ? 0 : l1.val;
-                var value2 = l2 == null ? 0 : l2.val;
+                var sum = (l1?.val ?? 0) + (l2?.val ?? 0) + mem;
+                var value = sum % 10;
+                mem = sum / 10;
 
-                var sum = value1 + value2 + carry;
-                carry = sum / 10;
-                sum %= 10;
-                current.next = new ListNode(sum);
+                l1 = l1?.next;
+                l2 = l2?.next;
 
-                current = current.next;
-                l1 = l1 == null ? null : l1.next;
-                l2 = l2 == null ? null : l2.next;
+                if (l1 == null && l2 == null && mem <= 0 && value <= 0)
+                {
+                    break;
+                }
+
+                var node = new ListNode(value);
+                current.next = node;
+                current = node;
             }
 
-            if (carry != 0)
-                current.next = new ListNode(carry);
-
-            return dummy.next;
+            return result.next ?? result;
         }
     }
 }
