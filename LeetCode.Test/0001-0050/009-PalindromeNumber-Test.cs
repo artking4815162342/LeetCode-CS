@@ -37,5 +37,19 @@ namespace LeetCode.Test
             result = solution.IsPalindrome(1231);
             Assert.IsFalse(result);
         }
+        
+        [TestMethod]
+        public void IsPalindromeTest_MultipleDigit1()
+        {
+            var solution = new _009_PalindromeNumber();
+            var result = solution.IsPalindrome(123321);
+            Assert.IsTrue(result);
+
+            result = solution.IsPalindrome(10001);
+            Assert.IsTrue(result);
+
+            result = solution.IsPalindrome(600);
+            Assert.IsFalse(result);
+        }
     }
 }
