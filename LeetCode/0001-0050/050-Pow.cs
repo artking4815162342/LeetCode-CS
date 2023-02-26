@@ -1,8 +1,11 @@
 //-----------------------------------------------------------------------------
 // Runtime: 48ms
-// Memory Usage: 15 MB
+// Runtime: 23ms
+// Memory Usage: 26.8 MB
 // Link: https://leetcode.com/submissions/detail/367515347/
 //-----------------------------------------------------------------------------
+
+using System;
 
 namespace LeetCode
 {
@@ -10,13 +13,29 @@ namespace LeetCode
     {
         public double MyPow(double x, int n)
         {
-            if (x == 0 || x == 1) return x;
-            if (n == 0) return 1;
+            if (Math.Abs(x) < double.Epsilon)
+            {
+                return 0;
+            }
 
-            var temp = MyPow(x, n / 2);
+            switch (n)
+            {
+                case 0:
+                    return 1;
+                case 1:
+                    return x;
+            }
 
-            if (n % 2 == 0) return temp * temp;
-            return n > 0 ? x * temp * temp : (temp * temp) / x;
+            var half = MyPow(x, Math.Abs(n / 2));
+
+            if (n % 2 == 0)
+            {
+                return n > 0 ? half * half : 1 / (half * half);
+            }
+            else
+            {
+                return n > 0 ? half * half * x : 1 / (half * half * x);
+            }
         }
     }
 }

@@ -55,15 +55,29 @@ namespace LeetCode.Test
         }
 
         [TestMethod]
-        public void MyPowTest_XLargerThanZero_NLessThanZero()
+        public void MyPowTest_XLargerThanZero_NLessThanZero0()
         {
             var solution = new _050_Pow();
             var result = solution.MyPow(5, -1);
             Assert.AreEqual(0.2, result);
+        }
 
-            result = solution.MyPow(2, -5);
+        [TestMethod]
+        public void MyPowTest_XLargerThanZero_NLessThanZero1()
+        {
+            var solution = new _050_Pow();
+            var result = solution.MyPow(2, -4);
+            Assert.AreEqual(0.0625, result);
+        }
+        
+        [TestMethod]
+        public void MyPowTest_XLargerThanZero_NLessThanZero2()
+        {
+            var solution = new _050_Pow();
+            var result = solution.MyPow(2, -5);
             Assert.AreEqual(0.03125, result);
         }
+
         [TestMethod]
         public void MyPowTest_XLessThanZero_NEqualZero()
         {
