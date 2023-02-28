@@ -324,6 +324,7 @@
     <Compile Include="0351-0400\0368-LargestDivisibleSubset.cs" />
     <Compile Include="0351-0400\0370-RangeAddition.cs" />
     <Compile Include="0351-0400\0371-SumOfTwoIntegers.cs" />
+    <Compile Include="0351-0400\0372-SuperPow.cs" />
     <Compile Include="0351-0400\0374-GuessNumberHigherOrLower.cs" />
     <Compile Include="0351-0400\0375-GuessNumberHigherOrLowerII.cs" />
     <Compile Include="0351-0400\0380-InsertDeleteGetRandom.cs" />
