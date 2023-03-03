@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Runtime: 248ms
-// Memory Usage: 33.4 MB
+// Runtime: 143ms
+// Memory Usage: 45.9 MB
 // Link: https://leetcode.com/submissions/detail/352419066/
 //-----------------------------------------------------------------------------
 
@@ -10,19 +10,28 @@ namespace LeetCode
     {
         public int RemoveDuplicates(int[] nums)
         {
-            if (nums.Length <= 1) { return nums.Length; }
-
-            var index = 0;
-            var lastValue = nums[index];
-            for (int i = 0; i < nums.Length; i++)
+            if (nums.Length <= 1)
             {
-                if (nums[i] == lastValue) { continue; }
-
-                nums[++index] = nums[i];
-                lastValue = nums[index];
+                return nums.Length;
             }
 
-            return index + 1;
+            var nextIndex = 1;
+            var memory = nums[0];
+
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == memory)
+                {
+                    continue;
+                }
+
+                nums[nextIndex] = nums[i];
+                
+                memory = nums[i];
+                nextIndex++;
+            }
+            
+            return nextIndex;
         }
     }
 }
