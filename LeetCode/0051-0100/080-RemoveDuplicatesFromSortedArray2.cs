@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Runtime: 480ms
-// Memory Usage: 
+// Runtime: 149ms
+// Memory Usage: 43.9
 // Link: 
 //-----------------------------------------------------------------------------
 
@@ -10,19 +10,37 @@ namespace LeetCode
     {
         public int RemoveDuplicates(int[] nums)
         {
-            if (nums.Length <= 2) { return nums.Length; }
+            if (nums.Length <= 2)
+            {
+                return nums.Length;
+            }
 
-            var index = 2;
-            var lastValue = nums[0];
+            var nextIndex = 1;
+            var memoryCount = 1;
+            var memory = nums[0];
 
-            for (int i = 2; i < nums.Length; i++)
-                if (nums[i] != nums[index - 2])
+            for (var i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] == memory)
                 {
-                    nums[index++] = nums[i];
-                    lastValue = nums[index - 2];
+                    if (memoryCount < 2)
+                    {
+                        nums[nextIndex] = memory;
+                        nextIndex++;
+                    }
+
+                    memoryCount++;
+                    continue;
                 }
 
-            return index;
+                nums[nextIndex] = nums[i];
+                nextIndex++;
+
+                memoryCount = 1;
+                memory = nums[i];
+            }
+
+            return nextIndex;
         }
     }
 }

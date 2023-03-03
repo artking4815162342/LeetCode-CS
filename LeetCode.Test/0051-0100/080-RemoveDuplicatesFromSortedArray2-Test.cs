@@ -6,27 +6,39 @@ namespace LeetCode.Test
     public class _080_RemoveDuplicatesFromSortedArray2_Test
     {
         [TestMethod]
-        public void RemoveDuplicatesTest()
+        public void RemoveDuplicatesTest0()
         {
-            var input = new int[] { 1, 1, 2, 2, 2, 3 };
+            var input = new int[] {1, 1, 2, 2, 2, 3};
 
             var solution = new _080_RemoveDuplicatesFromSortedArray2();
             var result = solution.RemoveDuplicates(input);
 
             Assert.AreEqual(5, result);
-            AssertHelper.AssertArray(new int[] { 1, 1, 2, 2, 3 }, input, true);
+            AssertHelper.AssertArray(new int[] {1, 1, 2, 2, 3}, input, true);
+        }
+
+        [TestMethod]
+        public void RemoveDuplicatesTest1()
+        {
+            var input = new int[] {0, 0, 1, 1, 1, 1, 2, 3, 3};
+
+            var solution = new _080_RemoveDuplicatesFromSortedArray2();
+            var result = solution.RemoveDuplicates(input);
+
+            Assert.AreEqual(7, result);
+            AssertHelper.AssertArray(new int[] {0, 0, 1, 1, 2, 3, 3}, input, true);
         }
 
         [TestMethod]
         public void RemoveDuplicatesTest_2()
         {
-            var input = new int[] { 1, 1, 1, 2, 2, 3 };
+            var input = new int[] {1, 1, 1, 2, 2, 3};
 
             var solution = new _080_RemoveDuplicatesFromSortedArray2();
             var result = solution.RemoveDuplicates(input);
 
             Assert.AreEqual(5, result);
-            AssertHelper.AssertArray(new int[] { 1, 1, 2, 2, 3 }, input, true);
+            AssertHelper.AssertArray(new int[] {1, 1, 2, 2, 3}, input, true);
         }
 
         [TestMethod]
@@ -41,25 +53,25 @@ namespace LeetCode.Test
         [TestMethod]
         public void RemoveDuplicatesTest_OneItem()
         {
-            var input = new int[] { 1 };
+            var input = new int[] {1};
 
             var solution = new _080_RemoveDuplicatesFromSortedArray2();
             var result = solution.RemoveDuplicates(input);
 
             Assert.AreEqual(1, result);
-            AssertHelper.AssertArray(new int[] { 1 }, input);
+            AssertHelper.AssertArray(new int[] {1}, input);
         }
 
         [TestMethod]
         public void RemoveDuplicatesTest_TwoItem()
         {
-            var input = new int[] { 1, 1 };
+            var input = new int[] {1, 1};
 
             var solution = new _080_RemoveDuplicatesFromSortedArray2();
             var result = solution.RemoveDuplicates(input);
 
             Assert.AreEqual(2, result);
-            AssertHelper.AssertArray(new int[] { 1, 1 }, input);
+            AssertHelper.AssertArray(new int[] {1, 1}, input);
         }
     }
 }
