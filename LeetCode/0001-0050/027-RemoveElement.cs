@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // Runtime: 236ms
+// Runtime: 130ms
 // Memory Usage: 30.1 MB
+// Memory Usage: 42.7  MB
 // Link: https://leetcode.com/submissions/detail/351897187/
 //-----------------------------------------------------------------------------
 
@@ -10,17 +12,18 @@ namespace LeetCode
     {
         public int RemoveElement(int[] nums, int val)
         {
-            var lastIndex = nums.Length - 1;
+            var nextIndex = 0;
 
-            for (int i = 0; i <= lastIndex; i++)
+            for (var i = 0; i < nums.Length; i++)
             {
-                if (nums[i] == val)
+                if (nums[i] != val)
                 {
-                    nums[i--] = nums[lastIndex--];
+                    nums[nextIndex] = nums[i];
+                    nextIndex++;
                 }
             }
 
-            return lastIndex + 1;
+            return nextIndex;
         }
     }
 }
