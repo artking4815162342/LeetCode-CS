@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Runtime: 92ms
-// Memory Usage: 27.8 MB
+// Runtime: 79ms
+// Memory Usage: 42.2 MB
 // Link: https://leetcode.com/submissions/detail/358364330/
 //-----------------------------------------------------------------------------
 
@@ -21,19 +21,18 @@ namespace LeetCode
     {
         public ListNode RemoveElements(ListNode head, int val)
         {
-            var dummy = new ListNode(-1);
-            dummy.next = head;
-            ListNode prev = dummy, curr = head;
-            while (curr != null)
+            if (head == null)
             {
-                if (curr.val == val)
-                    prev.next = curr.next;
-                else
-                    prev = prev.next;
-                curr = curr.next;
+                return null;
             }
 
-            return dummy.next;
+            if (head.val != val)
+            {
+                head.next = RemoveElements(head.next, val);
+                return head;
+            }
+
+            return RemoveElements(head.next, val);
         }
     }
 }
