@@ -7,6 +7,9 @@ namespace LeetCode
     {
         public int SuperPow(int a, int[] b)
         {
+            //TODO: solve issue
+            return default;
+            
             if (Math.Abs(a) < double.Epsilon)
             {
                 return 0;

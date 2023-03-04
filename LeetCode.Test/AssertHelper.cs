@@ -22,14 +22,14 @@ namespace LeetCode.Test
             Assert.IsNull(current);
         }
 
-        public static void AssertArray<T>(T[] expected, T[] actual, bool ignoreLength = false)
+        public static void AssertArray<T>(IList<T> expected, IList<T> actual, bool ignoreLength = false)
         {
             if (!ignoreLength)
             {
-                Assert.AreEqual(expected.Length, actual.Length, message: "length is not match");
+                Assert.AreEqual(expected.Count, actual.Count, message: "length is not match");
             }
 
-            for (int i = 0; i < expected.Length; i++)
+            for (int i = 0; i < expected.Count; i++)
             {
                 Assert.AreEqual(expected[i], actual[i], message: $"i {i} is not match");
             }
@@ -135,6 +135,7 @@ namespace LeetCode.Test
                     stack1.Push(cur1.left);
                     stack2.Push(cur2.left);
                 }
+
                 if (cur1.right == null)
                 {
                     Assert.IsNull(cur2.right);
