@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode.Test
 {
@@ -20,6 +21,22 @@ namespace LeetCode.Test
             }
 
             Assert.IsNull(current);
+        }
+
+        public static void AssertCollectionAnyOrder<T>(IEnumerable<T> expected, IEnumerable<T> actual)
+        {
+            HashSet<T> actualSet = new HashSet<T>(actual);
+            Assert.AreEqual(actualSet.Count, actual.Count(), message: "There are doubles in actual");
+
+            foreach (var expectedItem in expected)
+            {
+                Assert.IsTrue(actualSet.Contains(expectedItem), message: $"There isn`t item: {expectedItem}");
+            }
+
+            foreach (var actualItem in actual)
+            {
+                Assert.IsTrue(expected.Contains(actualItem), message: $" There is extra item: {actualItem}");
+            }
         }
 
         public static void AssertArray<T>(IList<T> expected, IList<T> actual, bool ignoreLength = false)

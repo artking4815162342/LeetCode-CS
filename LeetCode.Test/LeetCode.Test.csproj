@@ -258,6 +258,7 @@
     <Compile Include="0201-0250\0242-ValidAnagram-Test.cs" />
     <Compile Include="0201-0250\0243-ShortestWordDistance-Test.cs" />
     <Compile Include="0201-0250\0246-StrobogrammaticNumber-Test.cs" />
+    <Compile Include="0201-0250\0246-StrobogrammaticNumber2-Test.cs" />
     <Compile Include="0251-0300\0252-MeetingRooms-Test.cs" />
     <Compile Include="0251-0300\0253-MeetingRoomsII-Test.cs" />
     <Compile Include="0251-0300\0256-PaintHouse-Test.cs" />

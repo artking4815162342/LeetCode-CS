@@ -254,6 +254,7 @@
     <Compile Include="0201-0250\0242-ValidAnagram.cs" />
     <Compile Include="0201-0250\0243-ShortestWordDistance.cs" />
     <Compile Include="0201-0250\0246-StrobogrammaticNumber.cs" />
+    <Compile Include="0201-0250\0247-StrobogrammaticNumber2.cs" />
     <Compile Include="0251-0300\0252-MeetingRooms.cs" />
     <Compile Include="0251-0300\0253-MeetingRoomsII.cs" />
     <Compile Include="0251-0300\0256-PaintHouse.cs" />
