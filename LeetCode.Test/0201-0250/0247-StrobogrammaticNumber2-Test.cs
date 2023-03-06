@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace LeetCode.Test
 {
     [TestClass]
-    public sealed class _0246_StrobogrammaticNumber2_Test
+    public sealed class _0247_StrobogrammaticNumber2_Test
     {
         [TestMethod]
         public void FindStrobogrammatic0()
