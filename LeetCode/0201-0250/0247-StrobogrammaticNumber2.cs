@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LeetCode
 {
@@ -16,12 +17,18 @@ namespace LeetCode
 
         private void Enrich(_ResultInfo resultInfo)
         {
-            var beforeCount = resultInfo.List.Count;
+            var beforeCount = resultInfo.Builders.Count;
             for (var i = resultInfo.Start; i < beforeCount; i++)
             {
                 foreach (var pair in GetPairs())
                 {
-                    resultInfo.List.Add($"{pair.Item1}{resultInfo.List[i]}{pair.Item2}");
+                    var oldBuilder = resultInfo.Builders[i];
+                    var sb = new StringBuilder(oldBuilder.Length + 2);
+                    sb.Append(pair.Item1);
+                    sb.Append(oldBuilder);
+                    sb.Append(pair.Item2);
+
+                    resultInfo.Builders.Add(sb);
                 }
             }
 
@@ -38,37 +45,41 @@ namespace LeetCode
             var oddInfo = _ResultInfo.MakeOdd();
             if (n == 1)
             {
-                return oddInfo.List;
+                return oddInfo.Builders.Select(b => b.ToString()).ToList();
             }
 
             var evenInfo = _ResultInfo.MakeEven();
             if (n == 2)
             {
-                evenInfo.List.RemoveAt(0);
-                return evenInfo.List;
+                evenInfo.Builders.RemoveAt(0);
+                return evenInfo.Builders.Select(b => b.ToString()).ToList();
             }
 
-            for (var i = 3; i <= n; i++)
+            if (n % 2 != 0)
             {
-                if (i % 2 != 0)
+                for (var i = 3; i <= n; i += 2)
                 {
                     Enrich(oddInfo);
                 }
-                else
+            }
+            else
+            {
+                for (var i = 4; i <= n; i += 2)
                 {
                     Enrich(evenInfo);
                 }
             }
 
             var resultInfo = n % 2 != 0 ? oddInfo : evenInfo;
-            return resultInfo.List
-                .Where((s, index) => s[0] != '0' && index >= resultInfo.Start)
+            return resultInfo.Builders
+                .Where((sb, index) => sb[0] != '0' && index >= resultInfo.Start)
+                .Select(builder => builder.ToString())
                 .ToList();
         }
 
         private sealed class _ResultInfo
         {
-            public List<string> List;
+            public List<StringBuilder> Builders;
             public int Start;
 
             private _ResultInfo()
@@ -79,7 +90,12 @@ namespace LeetCode
             {
                 return new()
                 {
-                    List = new List<string>() {"0", "1", "8"},
+                    Builders = new List<StringBuilder>()
+                    {
+                        new("0"),
+                        new("1"),
+                        new("8"),
+                    },
                     Start = 0,
                 };
             }
@@ -88,7 +104,14 @@ namespace LeetCode
             {
                 return new()
                 {
-                    List = new List<string>() {"00", "11", "69", "88", "96"},
+                    Builders = new List<StringBuilder>()
+                    {
+                        new("00"),
+                        new("11"),
+                        new("69"),
+                        new("88"),
+                        new("96"),
+                    },
                     Start = 0,
                 };
             }
