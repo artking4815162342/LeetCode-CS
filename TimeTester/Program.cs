@@ -7,7 +7,7 @@ public static class TimeTester
     public static void Main(string[] args)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
-        var times = 100000;
+        var times = 10000;
 
         var solution = new _0248_StrobogrammaticNumber3();
         for (int i = 0; i < times; i++)

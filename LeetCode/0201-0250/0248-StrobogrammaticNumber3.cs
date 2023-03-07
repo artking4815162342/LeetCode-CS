@@ -23,8 +23,10 @@ namespace LeetCode
                 }
             }
 
-            return Calc(oddInfo, low.ToCharArray(), high.ToCharArray()) +
-                   Calc(evenInfo, low.ToCharArray(), high.ToCharArray());
+            var lowArray = low.ToCharArray();
+            var highArray = high.ToCharArray();
+
+            return Calc(oddInfo, lowArray, highArray) + Calc(evenInfo, lowArray, highArray);
         }
 
         private int Calc(_ResultInfo resultInfo, char[] low, char[] high)
@@ -117,7 +119,7 @@ namespace LeetCode
             {
                 return new()
                 {
-                    Chars = new List<char[]>
+                    Chars = new List<char[]>(1000)
                     {
                         new[] {'0'},
                         new[] {'1'},
@@ -131,7 +133,7 @@ namespace LeetCode
             {
                 return new()
                 {
-                    Chars = new List<char[]>
+                    Chars = new List<char[]>(1000)
                     {
                         new[] {'0', '0'},
                         new[] {'1', '1'},
