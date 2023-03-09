@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
-// Runtime: 160ms
-// Memory Usage: 
-// Link: 
+// Runtime: 88ms
+// Memory Usage: 40.8 MB
 //-----------------------------------------------------------------------------
 
 namespace LeetCode
@@ -10,35 +9,68 @@ namespace LeetCode
     {
         public ListNode ReverseKGroup(ListNode head, int k)
         {
-            if (k <= 1) { return head; }
-
-            var dummyHead = new ListNode(-1);
-            dummyHead.next = head;
-            ListNode p = dummyHead, q, r;
-            int i = 0;
-
-            while (p.next != null)
+            if (k <= 1)
             {
-                q = p.next;
-                for (i = 0; i < k; i++)
-                {
-                    if (q == null) { return dummyHead.next; }
-                    q = q.next;
-                }
-
-                q = p.next;
-                for (i = 1; i < k; i++)
-                {
-                    r = q.next;
-                    q.next = r.next;
-                    r.next = p.next;
-                    p.next = r;
-                }
-
-                p = q;
+                return head;
             }
 
-            return dummyHead.next;
+            var count = CountList(head);
+            if (k > count)
+            {
+                return head;
+            }
+
+            ListNode result = null;
+            ListNode iterationNode = null;
+            ListNode iterationTail = head;
+
+            var reverseCount = count / k;
+            for (var i = 0; i < reverseCount; i++)
+            {
+                var groupTail = iterationNode;
+                var group = ReverseKGroupInternal(iterationTail, out iterationTail, out iterationNode, k);
+                if (result == null)
+                {
+                    result = group;
+                }
+                else
+                {
+                    groupTail.next = group;
+                }
+            }
+
+            if (iterationNode != null)
+            {
+                iterationNode.next = iterationTail;
+            }
+
+            return result;
+        }
+
+        private ListNode ReverseKGroupInternal(ListNode head, out ListNode tail, out ListNode node, int k)
+        {
+            if (k <= 1 || head.next == null)
+            {
+                node = head;
+                tail = head.next;
+                return head;
+            }
+
+            var result = ReverseKGroupInternal(head.next, out tail, out node, k - 1);
+            node.next = head;
+            node = node.next;
+
+            return result;
+        }
+
+        private int CountList(ListNode head)
+        {
+            if (head == null)
+            {
+                return 0;
+            }
+
+            return 1 + CountList(head.next);
         }
     }
 }
