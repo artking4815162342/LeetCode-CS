@@ -877,6 +877,7 @@
     <Compile Include="1501-1550\1508-RangeSumOfSortedSubarraySums.cs" />
     <Compile Include="1501-1550\1512-NumberOfGoodPairs.cs" />
     <Compile Include="1501-1550\1518-WaterBottles.cs" />
+    <Compile Include="1700-1750\1721-SwappingNodesLinkedList.cs" />
     <Compile Include="Interval.cs" />
     <Compile Include="ListNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

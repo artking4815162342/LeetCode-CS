@@ -10,21 +10,18 @@ namespace LeetCode
     {
         public ListNode SwapPairs(ListNode head)
         {
-            var dummyHead = new ListNode(-1);
-            dummyHead.next = head;
-            ListNode p = dummyHead, q;
-
-            while (p.next != null && p.next.next != null)
+            if (head?.next == null)
             {
-                q = p.next;
-                p.next = q.next;
-                q.next = p.next.next;
-                p.next.next = q;
-
-                p = q;
+                return head;
             }
 
-            return dummyHead.next;
+            var next = head.next;
+            var nextNext = next.next;
+
+            next.next = head;
+            head.next = SwapPairs(nextNext);
+
+            return next;
         }
     }
 }

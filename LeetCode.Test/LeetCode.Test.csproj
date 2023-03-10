@@ -878,6 +878,7 @@
     <Compile Include="1501-1550\1508-RangeSumOfSortedSubarraySums-Test.cs" />
     <Compile Include="1501-1550\1512-NumberOfGoodPairs-Test.cs" />
     <Compile Include="1501-1550\1518-WaterBottles-Test.cs" />
+    <Compile Include="1700-1750\1721-SwappingNodesLinkedList-Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssertHelper.cs" />
     <Compile Include="TestHelper.cs" />
