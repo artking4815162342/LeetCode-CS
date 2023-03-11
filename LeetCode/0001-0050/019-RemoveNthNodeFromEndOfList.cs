@@ -10,29 +10,27 @@ namespace LeetCode
     {
         public ListNode RemoveNthFromEnd(ListNode head, int n)
         {
-            if (head == null || n <= 0) { return null; }
+            var iterator = n;
+            var count = RemoveNthFromEndInternal(head, ref iterator);
+            return count == n ? head.next : head;
+        }
 
-            ListNode fakeHead, node1, node2;
-            fakeHead = new ListNode(-1);
-            fakeHead.next = head;
-
-            node1 = node2 = fakeHead;
-            for (int i = 0; i < n; i++)
+        private int RemoveNthFromEndInternal(ListNode head, ref int n)
+        {
+            if (head == null)
             {
-                if (node1 == null) { return null; }
-                node1 = node1.next;
+                return 0;
             }
 
-            if (node1 != null)
+            var count = 1 + RemoveNthFromEndInternal(head.next, ref n);
+
+            n--;
+            if (n == -1)
             {
-                while (node1.next != null)
-                {
-                    node1 = node1.next;
-                    node2 = node2.next;
-                }
-                node2.next = node2.next.next;
+                head.next = head.next?.next;
             }
-            return fakeHead.next;
+
+            return count;
         }
     }
 }
