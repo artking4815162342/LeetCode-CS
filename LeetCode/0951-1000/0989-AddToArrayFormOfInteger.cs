@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // Runtime: 284ms
+// Runtime: 167ms
 // Memory Usage: 38.8 MB
+// Memory Usage: 55.6 MB
 // Link: https://leetcode.com/submissions/detail/352428880/
 //-----------------------------------------------------------------------------
 
@@ -10,41 +12,53 @@ namespace LeetCode
 {
     public class _0989_AddToArrayFormOfInteger
     {
-        public IList<int> AddToArrayForm(int[] A, int K)
+        public IList<int> AddToArrayForm(int[] num, int k)
         {
-            var result = new List<int>();
-            var carry = 0;
+            return AddStrings(num, k.ToString());
+        }
 
-            var i = A.Length - 1;
-            while (i >= 0 && K > 0)
+        private int GetDigitByIndex(string num, int index)
+        {
+            if (index >= num.Length || index < 0)
             {
-                var sum = A[i--] + K % 10 + carry;
-                K /= 10;
-
-                var digit = sum % 10;
-                carry = sum / 10;
-                result.Add(digit);
+                return 0;
             }
 
-            while (i >= 0)
+            return num[index] - '0';
+        }
+
+        private int GetDigitByIndex(int[] num, int index)
+        {
+            if (index >= num.Length || index < 0)
             {
-                var sum = A[i--] + carry;
-                var digit = sum % 10;
-                carry = sum / 10;
-                result.Add(digit);
+                return 0;
             }
 
-            while (K > 0)
-            {
-                var sum = K % 10 + carry;
-                K /= 10;
-                var digit = sum % 10;
-                carry = sum / 10;
-                result.Add(digit);
-            }
+            return num[index];
+        }
 
-            if (carry > 0)
-                result.Add(carry);
+        private IList<int> AddStrings(int[] num1, string num2)
+        {
+            var result = new List<int>(num1.Length);
+            var mem = 0;
+            var index1 = num1.Length - 1;
+            var index2 = num2.Length - 1;
+
+            while (true)
+            {
+                var sum = GetDigitByIndex(num1, index1) + GetDigitByIndex(num2, index2) + mem;
+                var value = sum % 10;
+                mem = sum / 10;
+
+                result.Add(value);
+                index1--;
+                index2--;
+
+                if (index1 < 0 && index2 < 0 && mem <= 0)
+                {
+                    break;
+                }
+            }
 
             result.Reverse();
             return result;
