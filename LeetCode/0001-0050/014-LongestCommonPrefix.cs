@@ -10,18 +10,24 @@ namespace LeetCode
     {
         public string LongestCommonPrefix(string[] strs)
         {
-            if (strs.Length == 0) { return string.Empty; }
-            if (strs.Length == 1) { return strs[0]; }
+            if (strs.Length == 0)
+            {
+                return string.Empty;
+            }
 
-            var index = 0;
-            bool isSame = true;
+            if (strs.Length == 1)
+            {
+                return strs[0];
+            }
+
+            int index;
+            var isSame = true;
             var firstString = strs[0];
             for (index = 0; index < firstString.Length; index++)
             {
-                for (int i = 1; i < strs.Length; i++)
+                for (var i = 1; i < strs.Length; i++)
                 {
-                    if (strs[i].Length <= index ||
-                        strs[i][index] != firstString[index])
+                    if (strs[i].Length <= index || strs[i][index] != firstString[index])
                     {
                         isSame = false;
                         break;
