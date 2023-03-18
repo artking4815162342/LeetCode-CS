@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // Runtime: 80ms
+// Runtime: 77ms
 // Memory Usage: 25 MB
+// Memory Usage: 38.4 MB
 // Link: https://leetcode.com/submissions/detail/352778888/
 //-----------------------------------------------------------------------------
 
@@ -12,33 +14,38 @@ namespace LeetCode
     {
         public string AddBinary(string a, string b)
         {
-            var carry = 0;
-            var builder = new StringBuilder();
+            var sb = new StringBuilder();
+            var mem = 0;
+            var index1 = a.Length - 1;
+            var index2 = b.Length - 1;
 
-            var aLength = a.Length - 1;
-            var bLength = b.Length - 1;
-
-            int aVal, bVal, val;
-            while (aLength >= 0 || bLength >= 0)
+            while (true)
             {
-                aVal = aLength >= 0 ? a[aLength] - '0' : 0;
-                bVal = bLength >= 0 ? b[bLength] - '0' : 0;
+                var sum = GetDigitByIndex(a, index1) + GetDigitByIndex(b, index2) + mem;
+                var value = sum % 2;
+                mem = sum / 2;
 
-                val = aVal + bVal + carry;
-                builder.Insert(0, val & 1);
+                sb.Insert(0, value);
+                index1--;
+                index2--;
 
-                carry = val >> 1;
-
-                aLength--;
-                bLength--;
+                if (index1 < 0 && index2 < 0 && mem <= 0)
+                {
+                    break;
+                }
             }
 
-            if (carry >= 1)
+            return sb.ToString();
+        }
+
+        private int GetDigitByIndex(string num, int index)
+        {
+            if (index >= num.Length || index < 0)
             {
-                builder.Insert(0, carry);
+                return 0;
             }
 
-            return builder.ToString();
+            return num[index] - '0';
         }
     }
 }
