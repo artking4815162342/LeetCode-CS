@@ -49,5 +49,14 @@ namespace LeetCode.Test
 
             Assert.AreEqual("977417843281305829149250236100", result);
         }
+        
+        [TestMethod]
+        public void MultiplyTest_LargeNumber_3()
+        {
+            var solution = new _043_MultiplyStrings();
+            var result = solution.Multiply("8432708", "87372547");
+
+            Assert.AreEqual("736787176067276", result);
+        }
     }
 }
