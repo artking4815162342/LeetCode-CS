@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // Runtime: 88ms
+// Runtime: 94ms
 // Memory Usage: 23.5 MB
+// Memory Usage: 38.9 MB MB
 // Link: https://leetcode.com/submissions/detail/260382381/
 //-----------------------------------------------------------------------------
 
@@ -10,20 +12,30 @@ namespace LeetCode
     {
         public ListNode ReverseList(ListNode head)
         {
-            var dummyHead = new ListNode(-1);
-
-            var current = head;
-            while (current != null)
+            if (head == null)
             {
-                var next = current.next;
-
-                current.next = dummyHead.next;
-                dummyHead.next = current;
-
-                current = next;
+                return null;
             }
 
-            return dummyHead.next;
+            ListNode result = null;
+            var last = ReverseListInternal(head, ref result);
+            last.next = null;
+
+            return result;
+        }
+
+        private ListNode ReverseListInternal(ListNode current, ref ListNode result)
+        {
+            if (current.next == null)
+            {
+                result = current;
+                return result;
+            }
+
+            var node = ReverseListInternal(current.next, ref result);
+            node.next = current;
+
+            return node.next;
         }
     }
 }
