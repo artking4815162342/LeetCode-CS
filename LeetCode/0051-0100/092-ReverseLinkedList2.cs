@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
 // Runtime: 104ms
-// Memory Usage: 
+// Runtime: 82ms
+// Memory Usage: -
+// Memory Usage: 38.2 MB
 // Link: 
 //-----------------------------------------------------------------------------
 
@@ -10,28 +12,77 @@ namespace LeetCode
     {
         public ListNode ReverseBetween(ListNode head, int m, int n)
         {
-            if (m == n) { return head; }
-
-            ListNode dummyHead = new ListNode(-1);
-            dummyHead.next = head;
-            ListNode p = dummyHead, q, r;
-            int i = 0;
-            
-            for (i = 0; i < m - 1; i++)
+            if (m == n || head?.next == null)
             {
-                p = p.next;
+                return head;
             }
 
-            q = p.next;
-            for (i = m; i < n; i++)
+            ListNode beforeSublist = null;
+            ListNode subHead = null;
+            ListNode tail = null;
+
+            FindSubList(head, m, n, 1, ref beforeSublist, ref subHead, ref tail);
+
+            ListNode reversedSublist = null;
+            var last = ReverseListInternal(subHead, ref reversedSublist);
+            last.next = tail;
+
+            if (beforeSublist != null)
             {
-                r = q.next;
-                q.next = r.next;
-                r.next = p.next;
-                p.next = r;
+                beforeSublist.next = reversedSublist;
+                return head;
+            }
+            else
+            {
+                return reversedSublist;
+            }
+        }
+
+        private void FindSubList(
+            ListNode head,
+            int left,
+            int right,
+            int index,
+            ref ListNode beforeSublist,
+            ref ListNode sublistHead,
+            ref ListNode tail)
+        {
+            if (head == null)
+            {
+                return;
             }
 
-            return dummyHead.next;
+            if (index == left - 1)
+            {
+                beforeSublist = head;
+            }
+
+            if (index == left)
+            {
+                sublistHead = head;
+            }
+
+            if (index == right)
+            {
+                tail = head.next;
+                head.next = null;
+            }
+
+            FindSubList(head.next, left, right, index + 1, ref beforeSublist, ref sublistHead, ref tail);
+        }
+
+        private ListNode ReverseListInternal(ListNode current, ref ListNode result)
+        {
+            if (current.next == null)
+            {
+                result = current;
+                return result;
+            }
+
+            var node = ReverseListInternal(current.next, ref result);
+            node.next = current;
+
+            return node.next;
         }
     }
 }
