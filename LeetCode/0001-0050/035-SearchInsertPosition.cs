@@ -10,17 +10,24 @@ namespace LeetCode
     {
         public int SearchInsert(int[] nums, int target)
         {
-            int lo = 0, hi = nums.Length;
+            int low = 0, high = nums.Length;
 
-            while (lo < hi)
+            while (low < high)
             {
-                var mid = lo + (hi - lo) / 2;
-                if (nums[mid] == target) return mid;
-                else if (nums[mid] < target) lo = mid + 1;
-                else hi = mid;
+                var mid = low + (high - low) / 2;
+                if (nums[mid] == target)
+                {
+                    return mid;
+                }
+                else if (nums[mid] < target)
+                {
+                    low = mid + 1;
+                }
+
+                else high = mid;
             }
 
-            return lo;
+            return low;
         }
     }
 }
