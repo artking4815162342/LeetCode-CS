@@ -15,19 +15,29 @@ namespace LeetCode
             var stack = new Stack<char>();
             foreach (var ch in s)
             {
-                if (ch == '(' || ch == '[' || ch == '{')
-                    stack.Push(ch);
-                else if (ch == ')' || ch == ']' || ch == '}')
+                if (ch is '(' or '[' or '{')
                 {
-                    if (stack.Count <= 0) return false;
+                    stack.Push(ch);
+                }
+                else if (ch is ')' or ']' or '}')
+                {
+                    if (stack.Count <= 0)
+                    {
+                        return false;
+                    }
+
                     var lastCh = stack.Peek();
 
                     if ((ch == ')' && lastCh == '(') ||
                         (ch == ']' && lastCh == '[') ||
                         (ch == '}' && lastCh == '{'))
+                    {
                         stack.Pop();
+                    }
                     else
+                    {
                         return false;
+                    }
                 }
             }
 
