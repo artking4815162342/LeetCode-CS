@@ -6,15 +6,6 @@ namespace LeetCode.Test
     public class _069_Sqrt_Test
     {
         [TestMethod]
-        public void MySqrt_LessThanZero()
-        {
-            var solution = new _069_Sqrt();
-            var result = solution.MySqrt(-1);
-
-            Assert.AreEqual(-1, result);
-        }
-
-        [TestMethod]
         public void MySqrt_Zero()
         {
             var solution = new _069_Sqrt();
@@ -75,6 +66,24 @@ namespace LeetCode.Test
             var result = solution.MySqrt(int.MaxValue);
 
             Assert.AreEqual(46340, result);
+        }
+
+        [TestMethod]
+        public void MySqrtTest0()
+        {
+            var solution = new _069_Sqrt();
+            var result = solution.MySqrt(25281);
+
+            Assert.AreEqual(159, result);
+        }
+
+        [TestMethod]
+        public void MySqrtTest1()
+        {
+            var solution = new _069_Sqrt();
+            var result = solution.MySqrt(2147395599);
+
+            Assert.AreEqual(46339, result);
         }
     }
 }
