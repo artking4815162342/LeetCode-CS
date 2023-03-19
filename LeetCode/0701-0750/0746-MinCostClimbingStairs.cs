@@ -13,8 +13,9 @@ namespace LeetCode
         public int MinCostClimbingStairs(int[] cost)
         {
             int cost1 = 0, cost2 = 0;
-            var index = 2;
-            for (; index < cost.Length; index++)
+            int index;
+
+            for (index = 2; index < cost.Length; index++)
             {
                 var curr = Math.Min(cost1 + cost[index - 2], cost2 + cost[index - 1]);
                 cost1 = cost2;
